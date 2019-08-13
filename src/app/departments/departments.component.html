@@ -1,0 +1,28 @@
+<div class="columns is-vcentered">
+    <div class="column is-one-quarter">
+        <h2 nz-title>Departamentos</h2>
+    </div>
+    <div class="column">
+
+    </div>
+    <div class="column is-one-fifth">
+        <button nz-button nzSize="large" nzType="primary">Nuevo departamento</button>
+    </div>
+</div>
+
+<nz-divider></nz-divider>
+<div class="columns" style="height:85%">
+    <div class="column is-one-quarter">
+        <nz-switch [(ngModel)]="loading"></nz-switch>
+        <nz-card style="width: 300px;margin-top: 16px" [nzLoading]="loading">
+          <nz-card-meta
+            [nzAvatar]="avatarTemplate"
+            nzTitle="Card title"
+            nzDescription="This is the description"
+          ></nz-card-meta>
+        </nz-card>
+    </div>
+    <div style="background-color: white; height: 100%" class="column">
+        <nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ANT_ICONS } from '../ant-svg-icons'
+import { ANT_ICONS } from '../ant-svg-icons';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,13 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { SharedModule } from './shared.module'
+import { SharedModule } from './shared.module';
+import { DepartmentsComponent } from './departments/departments.component';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
+    DepartmentsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -24,7 +29,10 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    NgZorroAntdModule,
+    FlexLayoutModule,
+    NzIconModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
