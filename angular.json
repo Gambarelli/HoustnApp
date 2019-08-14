@@ -47,9 +47,12 @@
             ],
             "styles": [
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.less"
+              "src/styles.less",
+              "./node_modules/bulma/css/bulma.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/feather-icons/dist/feather.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

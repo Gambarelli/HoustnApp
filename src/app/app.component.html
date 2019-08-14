@@ -1,4 +1,5 @@
-<nz-layout class="layout">
+
+<!-- <nz-layout class="layout">
   <nz-header>
     <div class="logo"></div>
   </nz-header>
@@ -27,5 +28,34 @@
         <router-outlet></router-outlet>
       </nz-content>
     </nz-layout>
+  </nz-layout>
+</nz-layout> -->
+
+<nz-layout style="height: 100%">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" nzWidth="200px">
+    <div><img class="logo" src="{{isCollapsed ? '../assets/images/Logotype.png' : '../assets/images/Logopng.png' }}" alt=""></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+      <!-- <li nz-submenu nzTitle="User" nzIcon="user">
+        <ul>
+          <li nz-menu-item routerLink="form">Tom</li>
+          <li nz-menu-item>Bill</li>
+          <li nz-menu-item>Alex</li>
+        </ul>
+      </li> -->
+      <li nz-menu-item routerLink="departments">
+        <i nz-icon nzType="bars"></i>
+        <span>Departamentos</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="file"></i>
+        <span>File</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background-color:#6876F2"></nz-header>
+    <nz-content style="padding-top: 16px">
+      <router-outlet></router-outlet>
+    </nz-content>
   </nz-layout>
 </nz-layout>
