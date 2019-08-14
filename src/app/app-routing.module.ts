@@ -4,7 +4,7 @@ import { DepartmentsComponent } from './departments/departments.component';
 
 import { LoginComponent } from './page/login/login.component' 
 const routes: Routes = [
-  { path: '', redirectTo: 'table', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'table', loadChildren: () => import('./table/table.module').then(m => m.TableModule) },
   { path: 'departments', component: DepartmentsComponent },
   { path: 'login', component: LoginComponent },

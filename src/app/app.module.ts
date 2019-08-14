@@ -14,10 +14,7 @@ import en from '@angular/common/locales/en';
 import { SharedModule } from './shared.module';
 import { DepartmentsComponent } from './departments/departments.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from './page/login/login.component'
-
-import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 
 registerLocaleData(en);
@@ -37,8 +34,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     SharedModule,
     NgZorroAntdModule,
-    FlexLayoutModule,
-    NzIconModule
+    NzIconModule,
     ReactiveFormsModule
   ],
   providers: [
