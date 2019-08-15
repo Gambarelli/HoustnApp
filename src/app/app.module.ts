@@ -16,7 +16,11 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { LoginComponent } from './page/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
-import { MenuComponent } from './menu/menu.component'
+import { MenuComponent } from './menu/menu.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 registerLocaleData(en);
@@ -39,7 +43,10 @@ registerLocaleData(en);
     SharedModule,
     NgZorroAntdModule,
     NzIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
