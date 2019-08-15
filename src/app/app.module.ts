@@ -6,7 +6,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N, en_US, NZ_ICONS } from 'ng-zorro-antd';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -14,7 +14,10 @@ import en from '@angular/common/locales/en';
 import { SharedModule } from './shared.module';
 import { DepartmentsComponent } from './departments/departments.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { LoginComponent } from './page/login/login.component';
+import { LayoutComponent } from './layout/layout.component';
+import { MenuComponent } from './menu/menu.component'
+
 
 registerLocaleData(en);
 
@@ -22,6 +25,10 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     DepartmentsComponent,
+    LoginComponent,
+    LayoutComponent,
+    MenuComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -31,13 +38,13 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     SharedModule,
     NgZorroAntdModule,
-    FlexLayoutModule,
-    NzIconModule
+    NzIconModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: ANT_ICONS }
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
