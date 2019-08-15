@@ -4,7 +4,8 @@ import {
   UserOutline,
   ArrowLeftOutline,
   PlusCircleOutline,
-  LockOutline
+  LockOutline,
+  LogoutOutline
 } from '@ant-design/icons-angular/icons';
 
 export const ANT_ICONS = [
@@ -12,5 +13,6 @@ export const ANT_ICONS = [
   NotificationOutline,
   UserOutline,
   PlusCircleOutline,
-  LockOutline
+  LockOutline,
+  LogoutOutline
 ];
