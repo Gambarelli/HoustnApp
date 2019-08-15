@@ -14,7 +14,9 @@ import en from '@angular/common/locales/en';
 import { SharedModule } from './shared.module';
 import { DepartmentsComponent } from './departments/departments.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { LoginComponent } from './page/login/login.component'
+import { LoginComponent } from './page/login/login.component';
+import { LayoutComponent } from './layout/layout.component';
+import { MenuComponent } from './menu/menu.component'
 
 
 registerLocaleData(en);
@@ -24,6 +26,8 @@ registerLocaleData(en);
     AppComponent,
     DepartmentsComponent,
     LoginComponent,
+    LayoutComponent,
+    MenuComponent,
 
   ],
   imports: [

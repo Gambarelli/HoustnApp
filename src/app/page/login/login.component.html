@@ -26,7 +26,7 @@
             <span>Remember me</span>
           </label>
           <a class="login-form-forgot" class="login-form-forgot">Forgot password</a>
-          <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+          <button nz-button class="login-form-button" name="login" [nzType]="'primary'" [routerLink]="[ '/table']"> Log in</button>
           Or
           <a>register now!</a>
         </nz-form-control>
@@ -34,4 +34,3 @@
     </form>
   </div>
 </div>
-
