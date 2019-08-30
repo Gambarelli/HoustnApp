@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthService } from './services/auth.service';
 
 
 registerLocaleData(en);
@@ -50,7 +51,8 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    { provide: NZ_ICONS, useValue: ANT_ICONS }
+    { provide: NZ_ICONS, useValue: ANT_ICONS },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

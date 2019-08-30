@@ -7,16 +7,16 @@
       <img style="padding-bottom: 8px;" src="../../../assets/images/Logopng.png" alt="">
       <!-- <h2 nz-title>Login</h2> -->
       <nz-form-item>
-        <nz-form-control nzErrorTip="Ingrese su usuario!">
+        <nz-form-control nzErrorTip="Ingrese su correo!">
           <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+            <input type="text" nz-input formControlName="userName" #userEmail placeholder="Username" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="Ingrese su contraseña!">
           <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" />
+            <input type="password" nz-input formControlName="password" #userPassword placeholder="Password" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
@@ -26,7 +26,7 @@
             <span>Recordarme</span>
           </label>
           <a class="login-form-forgot" class="login-form-forgot">¿Olvido su contraseña?</a>
-          <button nz-button class="login-form-button" name="login" [nzType]="'primary'" routerLink="departments"> Log in</button>
+          <button nz-button class="login-form-button" name="login" [nzType]="'primary'" (click)="authService.login(userEmail.value, userPassword.value)"> Log in</button>
           <nz-divider></nz-divider>
           <a>Crear una cuenta</a>
         </nz-form-control>
