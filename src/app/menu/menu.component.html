@@ -50,7 +50,7 @@
         <i nz-icon nzType="file"></i>
         <span>File</span>
       </li> -->
-      <li nz-menu-item routerLink="/"> 
+      <li nz-menu-item routerLink="/" (click)="authService.logout()"> 
         <i nz-icon nzType="logout" nzTheme="outline"></i> 
         <span>Log out</span>
       </li>

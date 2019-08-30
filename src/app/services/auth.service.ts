@@ -26,9 +26,8 @@ export class AuthService {
           let userHoustnData = item.find(data => data.uid === user.uid);
           if (userHoustnData != undefined) {
             this.user = Object.assign({}, user, userHoustnData);
-            localStorage.setItem('user', JSON.stringify(this.user, this.getCircularReplacer()));
-          }
-    });
+            localStorage.setItem('user', JSON.stringify(this.user, this.getCircularReplacer()));          }
+        });
       } else {
         localStorage.setItem('user', null);
       }
@@ -71,8 +70,9 @@ export class AuthService {
   async login(email:  string, password:  string) {
 
     try {
-        await  this.afAuth.auth.signInWithEmailAndPassword(email, password);
+        let x = await  this.afAuth.auth.signInWithEmailAndPassword(email, password);
         this.router.navigate(['departments']);
+        console.log(this.afAuth.user);
     } catch (e) {
         alert('Error!'  +  e.message);
     }
@@ -81,7 +81,7 @@ export class AuthService {
   async logout(){
       await this.afAuth.auth.signOut();
       localStorage.removeItem('user');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
   }
 
   get isLoggedIn(): boolean {
