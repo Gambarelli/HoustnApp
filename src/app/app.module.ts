@@ -22,6 +22,9 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthService } from './services/auth.service';
+import { UsersComponent } from './page/users/users.component';
+import { TicketComponent } from './page/ticket/ticket.component';
+import { CompanyComponent } from './page/company/company.component';
 
 
 registerLocaleData(en);
@@ -33,6 +36,9 @@ registerLocaleData(en);
     LoginComponent,
     LayoutComponent,
     MenuComponent,
+    UsersComponent,
+    TicketComponent,
+    CompanyComponent,
 
   ],
   imports: [

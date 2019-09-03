@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
   }
-  constructor(private fb: FormBuilder,private router: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
 

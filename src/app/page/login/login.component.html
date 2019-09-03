@@ -26,7 +26,8 @@
             <span>Recordarme</span>
           </label>
           <a class="login-form-forgot" class="login-form-forgot">¿Olvido su contraseña?</a>
-          <button nz-button class="login-form-button" name="login" [nzType]="'primary'" (click)="authService.login(userEmail.value, userPassword.value)"> Log in</button>
+          <button nz-button class="login-form-button" name="login" [nzType]="'primary'"
+            (click)="authService.login(userEmail.value, userPassword.value)"> Log in</button>
           <nz-divider></nz-divider>
           <a>Crear una cuenta</a>
         </nz-form-control>
