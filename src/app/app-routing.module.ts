@@ -6,13 +6,17 @@ import { CompanyComponent } from './page/company/company.component';
 import { TicketComponent } from './page/ticket/ticket.component';
 import { LoginComponent } from './page/login/login.component';
 import { LayoutComponent } from '../app/layout/layout.component';
+import { UserLayoutComponent  } from '../app/layout/user-layout/user-layout.component';
 const routes: Routes = [
 
   {
     path: '',
     component: LoginComponent
   },
-
+  {
+    path: 'queue',
+    component: UserLayoutComponent
+  },
   {
     path: '',
     component: LayoutComponent,

@@ -3,7 +3,7 @@
     <img src="../../../assets/images/ImageLogin.png">
   </div>
   <div class="column">
-    <form style="margin: 0 auto;" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <form *ngIf="!showUserLogin" style="margin: 0 auto;" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
       <img style="padding-bottom: 8px;" src="../../../assets/images/Logopng.png" alt="">
       <!-- <h2 nz-title>Login</h2> -->
       <nz-form-item>
@@ -29,7 +29,26 @@
           <button nz-button class="login-form-button" name="login" [nzType]="'primary'"
             (click)="authService.login(userEmail.value, userPassword.value)"> Log in</button>
           <nz-divider></nz-divider>
-          <a>Crear una cuenta</a>
+          <a (click)="showUserLogin = true;">Ir a login de colaborador</a>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+    <form *ngIf="showUserLogin" style="margin: 0 auto;" nz-form [formGroup]="userLoginForm" class="login-form" (ngSubmit)="submitForm()">
+      <img style="padding-bottom: 8px;" src="../../../assets/images/Logopng.png" alt="">
+      <h4 style="text-align: center" nz-title>Acceso de colaboradores</h4>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Ingrese su código de acceso al departamento!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="accessCode" #accessCode placeholder="Código de acceso" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button class="login-form-button" name="login" [nzType]="'primary'"
+            (click)="authService.userLogin(accessCode.value)"> Ingresar al departamento</button>
+          <nz-divider></nz-divider>
+          <a (click)="showUserLogin = false;">Ir a login de administrador</a>
         </nz-form-control>
       </nz-form-item>
     </form>
