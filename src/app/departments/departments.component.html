@@ -14,17 +14,75 @@
 <div class="columns" style="height:85%">
     <div class="column is-one-quarter">
         <!-- <nz-switch [(ngModel)]="loading"></nz-switch> -->
-        <nz-card *ngFor="let department of departments | async" style="width: 100%;margin-top: 16px" [nzLoading]="loading">
+        <nz-card (click)="selectDepartment(department)" *ngFor="let department of departments | async" nzHoverable style="width: 100%;margin-top: 8px; border-radius: 4px" [nzLoading]="loading">
           <nz-card-meta
             [nzAvatar]="avatarTemplate"
             nzTitle="{{department.departmentName}}"
           ></nz-card-meta>
         </nz-card>
     </div>
-    <div style="background-color: white; height: 100%" class="column">
-        <nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton> 
-        <!-- <h3 nz-title>Detalle de departamentos</h3> -->
-    </div>
+    <div style=" overflow: auto; height: 100%; border-radius: 4px;" class="column">
+      <!-- <nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>  -->
+      <!-- <h3 *ngIf="selectedDepartment != undefined" nz-title>{{selectedDepartment.userName}}</h3>  -->
+      <div *ngIf="selectedDepartment != undefined" style="padding: 16px;">
+        <nz-row [nzGutter]="16">
+          <nz-col [nzSpan]="12">
+            <nz-card>
+              <nz-statistic
+                [nzValue]="11.28 | number: '1.0-2'"
+                [nzTitle]="'Active'"
+                [nzPrefix]="prefixTplOne"
+                [nzSuffix]="'%'"
+                [nzValueStyle]="{ color: '#3F8600' }"
+              >
+              </nz-statistic>
+              <ng-template #prefixTplOne><i nz-icon nzType="arrow-up"></i></ng-template>
+            </nz-card>
+          </nz-col>
+          <nz-col [nzSpan]="12">
+            <nz-card>
+              <nz-statistic
+                [nzValue]="9.3 | number: '1.0-2'"
+                [nzTitle]="'Idle'"
+                [nzPrefix]="prefixTplTwo"
+                [nzSuffix]="'%'"
+                [nzValueStyle]="{ color: '#CF1322' }"
+              >
+              </nz-statistic>
+              <ng-template #prefixTplTwo><i nz-icon nzType="arrow-down"></i></ng-template>
+            </nz-card>
+          </nz-col>
+        </nz-row>
+      </div>
+      <div style="background-color: white;padding: 16px; margin:16px;">
+        <nz-empty *ngIf="selectedDepartment == undefined"></nz-empty>
+        <nz-descriptions nzBordered style="margin-top: 16px;padding-left: 48px; padding-right: 48px;" *ngIf="selectedDepartment != undefined" nzTitle="Información general del departamento" nzLayout="vertical">
+            <nz-descriptions-item nzTitle="UserName">{{selectedDepartment.departmentName}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Telephone">18100000000</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Live">Hangzhou, Zhejiang</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Remark">Empty</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Address">
+              No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+            </nz-descriptions-item>
+          </nz-descriptions>
+          <nz-divider *ngIf="selectedDepartment != undefined"></nz-divider>
+        <h4 style="padding-left: 48px;padding-right: 48px;" *ngIf="selectedDepartment != undefined" nz-title>Usuarios asignados</h4>
+        <nz-list style="padding-left: 48px;padding-right: 48px;" *ngIf="selectedDepartment != undefined" [nzDataSource]="selectedDepartment.assignedUsers" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 6 }">
+          <ng-template #item let-item>
+            <nz-list-item style="border-radius: 4px;" [nzContent]="nzContent">
+              <ng-template #nzContent>
+                <nz-card [nzTitle]="item.userName">
+                  <div style="display: flex; justify-content: center; margin-top: 8px;">
+                    <span class="accessCode">{{item.accessCode}}</span>
+                </div>
+                </nz-card>
+              </ng-template>
+            </nz-list-item>
+          </ng-template>
+        </nz-list>
+      </div>
+      
+  </div>
 </div>
 <ng-template #avatarTemplate>
     <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
@@ -32,33 +90,54 @@
 <nz-drawer
       [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
       [nzMaskClosable]="false"
-      [nzWidth]="720"
+      [nzWidth]="400"
       [nzVisible]="visible"
-      nzTitle="Crear nuevo departamento"
+      nzTitle="Añadir nuevo usuario"
       (nzOnClose)="close()"
     >
-      <form nz-form>
-        <div nz-row nzGutter="8">
-          <div nz-col nzSpan="12">
+      <form nz-form [formGroup]="departmentForm" (ngSubmit)="addNewDepartment(departmentForm.value)">
+        <!-- <div nz-row nzGutter="8">
+        
+        </div> -->
+        <div nz-row nzSpan="12">
             <nz-form-item>
-              <nz-form-label>Name</nz-form-label>
+              <nz-form-label>Nombre del departamento</nz-form-label>
               <nz-form-control>
-                <input nz-input placeholder="please enter user name" />
+                <input nz-input formControlName="departmentName" #departmentName placeholder="please enter user name" />
               </nz-form-control>
             </nz-form-item>
           </div>
-          <div nz-col nzSpan="12">
+          <div nz-row nzSpan="12">
             <nz-form-item>
-              <nz-form-label>Url</nz-form-label>
+              <nz-form-label>Id de cola</nz-form-label>
               <nz-form-control>
-                <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
-                  <input type="text" nz-input placeholder="please enter url" />
+                <nz-input-group nzAddOnBefore="Id:">
+                  <input type="text" formControlName="queueId" nz-input/>
                 </nz-input-group>
               </nz-form-control>
             </nz-form-item>
           </div>
-        </div>
-        <div nz-row nzGutter="8">
+          <div nz-row nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Usuarios asignados</nz-form-label>
+              <nz-form-control>
+                <nz-input-group>
+                  <!-- <input type="text" formControlName="accessCode" nz-input placeholder="Porfavor ingrese un código" /> -->
+                  <nz-select
+                    [nzMaxTagCount]="3"
+                    [nzMaxTagPlaceholder]="tagPlaceHolder"
+                    style="width: 100%"
+                    nzMode="multiple"
+                    nzPlaceHolder="Please select"
+                    formControlName="assignedUsers"
+                  >
+                  <nz-option *ngFor="let user of users | async" [nzLabel]="user.userName" [nzValue]="user"></nz-option>
+                  </nz-select>
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        <!-- <div nz-row nzGutter="8">
           <div nz-col nzSpan="12">
             <nz-form-item>
               <nz-form-label>Owner</nz-form-label>
@@ -107,10 +186,10 @@
               </nz-form-control>
             </nz-form-item>
           </div>
+        </div> -->
+        <div class="footer">
+          <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
+          <button type="submit" value="Submit" (click)="close()" class="ant-btn ant-btn-primary"><span>Submit</span></button>
         </div>
       </form>
-      <div class="footer">
-        <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
-        <button type="button" (click)="close()" class="ant-btn ant-btn-primary"><span>Submit</span></button>
-      </div>
     </nz-drawer>

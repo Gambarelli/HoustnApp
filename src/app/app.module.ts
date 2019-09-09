@@ -25,6 +25,7 @@ import { AuthService } from './services/auth.service';
 import { UsersComponent } from './page/users/users.component';
 import { TicketComponent } from './page/ticket/ticket.component';
 import { CompanyComponent } from './page/company/company.component';
+import { UserLayoutComponent } from './layout/user-layout/user-layout.component';
 
 
 registerLocaleData(en);
@@ -39,6 +40,7 @@ registerLocaleData(en);
     UsersComponent,
     TicketComponent,
     CompanyComponent,
+    UserLayoutComponent,
 
   ],
   imports: [

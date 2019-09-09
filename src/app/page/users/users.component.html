@@ -1,1 +1,134 @@
-<p>users works!</p>
+<div class="columns is-vcentered">
+    <div class="column is-one-quarter">
+        <h2 nz-title>Users</h2>
+    </div>
+    <div class="column">
+
+    </div>
+    <div class="column is-one-fifth">
+        <button (click)="open()" nz-button nzSize="large" nzType="primary"><i nz-icon nzType="plus-circle" nzTheme="outline"></i>Nuevo usuario</button>
+    </div>
+</div>
+
+<nz-divider style="margin-bottom: 24px; margin-top: 0px;"></nz-divider>
+<div class="columns" style="height:85%;">
+    <div class="column is-one-quarter" style="padding-top:0px;">
+        <!-- <nz-switch [(ngModel)]="loading"></nz-switch> -->
+        <nz-card *ngFor="let user of users | async" nzHoverable style="width: 100%;margin-top: 8px; border-radius: 4px" [nzLoading]="loading" (click)="selectUser(user)">
+          <nz-card-meta
+            [nzAvatar]="avatarTemplate"
+            nzTitle="{{user.userName}}"
+          ></nz-card-meta>
+        </nz-card>
+    </div>
+    <div style="background-color: white; height: 100%; border-radius: 4px;" class="column">
+        <!-- <nz-skeleton [nzAvatar]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>  -->
+        <!-- <h3 *ngIf="selectedUser != undefined" nz-title>{{selectedUser.userName}}</h3>  -->
+        <nz-empty *ngIf="selectedUser == undefined"></nz-empty>
+        <div *ngIf="selectedUser != undefined" style="display: flex; justify-content: center;">
+            <nz-avatar [nzSize]="128" nzIcon="user"></nz-avatar>
+        </div>
+        <nz-descriptions nzBordered style="text-align: center; margin-top: 8px;padding-left: 48px; padding-right: 48px;" *ngIf="selectedUser != undefined" nzTitle="Información general del Usuario" nzLayout="vertical">
+            <nz-descriptions-item nzTitle="UserName">{{selectedUser.userName}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Telephone">18100000000</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Live">Hangzhou, Zhejiang</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Remark">Empty</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Address">
+              No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+            </nz-descriptions-item>
+          </nz-descriptions>
+          <h3 *ngIf="selectedUser != undefined" style="text-align: center" nz-title>Código de acceso</h3>
+          <div style="display: flex; justify-content: center; margin-top: 8px;" *ngIf="selectedUser != undefined">
+              <span class="accessCode">{{selectedUser.accessCode}}</span>
+          </div>
+    </div>
+</div>
+<ng-template #avatarTemplate>
+    <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+</ng-template>
+<nz-drawer
+      [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+      [nzMaskClosable]="false"
+      [nzWidth]="400"
+      [nzVisible]="visible"
+      nzTitle="Añadir nuevo usuario"
+      (nzOnClose)="close()"
+    >
+      <form nz-form [formGroup]="userForm" (ngSubmit)="addNewUser(userForm.value)">
+        <!-- <div nz-row nzGutter="8">
+        
+        </div> -->
+        <div nz-row nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Nombre del usuario</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="userName" placeholder="please enter user name" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-row nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Código de Acceso al departamento</nz-form-label>
+              <nz-form-control>
+                <nz-input-group nzAddOnBefore="Código:">
+                  <input type="text" formControlName="accessCode" nz-input placeholder="Porfavor ingrese un código" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        <!-- <div nz-row nzGutter="8">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Owner</nz-form-label>
+              <nz-form-control>
+                <nz-select nzPlaceHolder="Please select an owner"></nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Type</nz-form-label>
+              <nz-form-control>
+                <nz-select nzPlaceHolder="Please choose the type"></nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row nzGutter="8">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>Approver</nz-form-label>
+              <nz-form-control>
+                <nz-select nzPlaceHolder="Please choose the approver"></nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label>DateTime</nz-form-label>
+              <nz-form-control>
+                <nz-range-picker></nz-range-picker>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row nzGutter="8">
+          <div nz-col nzSpan="24">
+            <nz-form-item>
+              <nz-form-label>Description</nz-form-label>
+              <nz-form-control>
+                <textarea
+                  nz-input
+                  placeholder="please enter url description"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div> -->
+        <div class="footer">
+          <button type="button" (click)="close()" class="ant-btn" style="margin-right: 8px;"><span>Cancel</span></button>
+          <button type="submit" value="Submit" (click)="close()" class="ant-btn ant-btn-primary"><span>Submit</span></button>
+        </div>
+      </form>
+    </nz-drawer>

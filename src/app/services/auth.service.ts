@@ -15,6 +15,7 @@ export class AuthService {
 
   user: User;
   private db: AngularFirestore;
+  departments: any;
 
   constructor(public afAuth: AngularFireAuth, public router: Router, db: AngularFirestore) {
 
@@ -88,6 +89,27 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return user !== null;
+  }
+
+  async userLogin(accessCode: string) {
+    let assignedUser;
+    let assignedDepartment;
+    this.departments = await this.db.collection('departments').valueChanges();
+    this.departments.forEach(data => {
+      assignedDepartment = data.find( department => {
+        if (department.assignedUsers !== undefined){
+          assignedUser = department.assignedUsers.find( user =>{
+            return user.accessCode === accessCode;
+          });
+        }
+        return assignedUser !== undefined;
+      });
+      if (assignedDepartment !== undefined) {
+        localStorage.setItem('user', JSON.stringify(assignedUser, this.getCircularReplacer()));
+        localStorage.setItem('department', JSON.stringify(assignedDepartment, this.getCircularReplacer()));
+        this.router.navigate(['queue']);
+       }
+    });
   }
 
 
