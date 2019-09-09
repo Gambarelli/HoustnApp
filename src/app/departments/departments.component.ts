@@ -45,6 +45,9 @@ export class DepartmentsComponent implements OnInit {
 // queueId
 // "R"
 
+  time: Date | null = null;
+  defaultOpenValue = new Date(0, 0, 0, 0, 0, 0);
+
   constructor(db: AngularFirestore) {
     this.departments = db.collection('departments').valueChanges();
     this.users = db.collection('users').valueChanges();
