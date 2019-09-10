@@ -26,6 +26,7 @@ import { UsersComponent } from './page/users/users.component';
 import { TicketComponent } from './page/ticket/ticket.component';
 import { CompanyComponent } from './page/company/company.component';
 import { UserLayoutComponent } from './layout/user-layout/user-layout.component';
+import { QueueManagementComponent } from './page/queue-management/queue-management.component';
 
 
 registerLocaleData(en);
@@ -41,6 +42,7 @@ registerLocaleData(en);
     TicketComponent,
     CompanyComponent,
     UserLayoutComponent,
+    QueueManagementComponent,
 
   ],
   imports: [

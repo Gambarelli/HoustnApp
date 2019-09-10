@@ -1,0 +1,57 @@
+<div nz-row style="height: 100%; background-color: #F0F2F5" nzGutter="8">
+    <div style="height: 100%;" nz-col class="gutter-row" nzSpan="14">
+      <div nz-row class="metadata-container">
+       <div style="display: flex;flex-direction: column;height: 50%;justify-content: space-between; margin-bottom: 32px;" nz-row>
+            <div style="height: 20%" nz-row>
+                <div nz-col nzSpan="12">
+                    <div style="font-weight: 500;font-size: 18px;">Departamento</div>
+                    <div class="metadata-value">{{department.departmentName}}</div>
+                </div>
+                <div nz-col nzSpan="12">
+                    <div style="font-weight: 500;font-size: 18px;">Agente</div>
+                    <div class="metadata-value">{{user.userName}}</div>
+                </div>
+            </div>
+            <div style="height: 20%" nz-row>
+                <div nz-col nzSpan="12">
+                    <div style="font-weight: 500;font-size: 18px;">Ticket restantes</div>
+                    <div class="metadata-value-2">24</div>
+                </div>
+                <div nz-col nzSpan="12">
+                    <div style="font-weight: 500;font-size: 18px;">Tiempo de atención promedio</div>
+                    <div class="metadata-value-2">15min</div>
+                </div>
+            </div>
+            <div style="height: 33%" nz-row>
+                <div nz-col nzSpan="24">
+                    <div style="font-weight: 500;font-size: 18px;">Ticket actual</div>
+                    <div style="background: rgba(33, 150, 83, 0.2);border-radius: 8px; height: 100px;">
+                        <span *ngIf="activeDepartment != undefined" class="current-ticket">
+                            {{department.queueId+activeDepartment.nowServing}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+       </div>
+        <div style="height: 50%;" nz-row>
+            <div nz-col>
+                <div style="font-weight: 500;font-size: 18px;margin-bottom: 16px;">Historico</div>
+                <div>
+                <nz-timeline>
+                        <nz-timeline-item *ngFor="let ticket of tickets | async">
+                            {{ticket.queueId + ' ' + ticket.ticketId}}
+                        </nz-timeline-item>
+                </nz-timeline>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 100%;display: flex;flex-direction: column;justify-content: space-around;" nz-col class="gutter-row" nzSpan="4">
+      <div class="close-queue-button">Cerrar ventanilla</div>
+      <div class="logout-button">Cerrar sesión</div>
+    </div>
+    <div style="height: 100%;" nz-col class="gutter-row" nzSpan="6">
+      <div class="next-button">Siguiente</div>
+    </div>
+</div>
